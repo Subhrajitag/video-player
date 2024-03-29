@@ -6,8 +6,15 @@ import { useContext, useEffect, useState } from "react";
 import { VideosContext } from "@/context/VideosContext";
 import Filter from "@/components/Filter";
 
-
 const inter = Inter({ subsets: ["latin"] });
+
+interface Video{
+  title:string,
+  subtitle:string,
+  sources:string,
+  description:string,
+  thumb:string,
+}
 
 export default function Home() {
   const { searchTerm, filter, allVideosData } = useContext(VideosContext);
@@ -21,8 +28,7 @@ export default function Home() {
   });
 
 
-  
-  const filteredVideos = allVideosData.filter((video) => {
+  const filteredVideos = allVideosData.filter((video:Video) => {
     if (!searchTerm && !filter) {
       return video;
     }
@@ -43,7 +49,7 @@ export default function Home() {
 
   useEffect(() => {
     setVideos(filteredVideos);
-  }, [searchTerm, filter]);
+  }, [searchTerm, filter,filteredVideos]);
 
   return (
     <main className={`w-full flex-col items-center ${inter.className}`}>
@@ -63,7 +69,7 @@ export default function Home() {
           >
            
               {videos &&
-                videos.map((video) => (
+                videos.map((video:Video) => (
                   <div
                     key={video.title}
                     onClick={() =>
