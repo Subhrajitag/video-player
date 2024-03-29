@@ -7,7 +7,7 @@ interface CardProps {
 }
 const Card = ({ video }: CardProps) => {
   return (
-    <div className="flex items-center cursor-pointer px-3 py-2 text-black   hover:text-white duration-200 ease-in-out">
+    <div className="flex items-center cursor-pointer px-3 py-2 text-black  hover:text-white duration-200 ease-in-out">
       {/* <Image
         src={video.img}
         className=" sm:w-[60px] sm:h-[60px] lg:w-[140px] lg:h-[80px] rounded-lg object-cover "

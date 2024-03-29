@@ -16,12 +16,12 @@ const VideoPlayer = ({ currentVideo }: VideoPlayerProps) => {
   //   }
   // }, [isPlaying, currentVideo]);
   return (
-    <div className="w-3/4 h-full m-6">
+    <div className="h-full md:m-6 m-3 ">
       <div className="relative rounded-lg cursor-pointer" id="videoContainer">
         <video
           onPlay={() => SetPlaying(true)}
           onPause={() => SetPlaying(false)}
-          className="min-w-full min-h-full w-auto h-auto bg-cover"
+          className="min-w-full min-h-full w-auto h-auto bg-cover rounded-xl shadow"
           controls
           src={currentVideo.sources}
           id="mainVideo"
@@ -33,10 +33,10 @@ const VideoPlayer = ({ currentVideo }: VideoPlayerProps) => {
           <h2 className="text-white text-xl">{currentVideo.title}</h2>
         </div>
       </div>
-      <div className="text-base mt-4">
+      <div className="text-xl font-medium my-3">
         {currentVideo.subtitle}
       </div>
-      <div className="text-base mt-4">
+      <div className="text-base">
         {currentVideo.description}
       </div>
     </div>

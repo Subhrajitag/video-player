@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { VideoContextType, VideosContext } from "@/context/VideosContext";
 import Filter from "@/components/Filter";
 import { Video } from "../types/VideoTypes";
+import { ReactSortable } from "react-sortablejs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,14 +41,20 @@ export default function Home() {
   useEffect(() => {
     setVideos(filteredVideos);
   }, [searchTerm, filter]);
+  // const [state, setState] = useState([{ id: "1", name: "shrek" }]);
 
 
   return (
-    <main className={`w-full flex-col items-center ${inter.className}`}>
+    <main className={`w-full flex-col items-center  ${inter.className}`}>
       <Topbar />
-      <div className="flex w-full h-full">
+      {/* <ReactSortable tag="ul" list={state} setList={setState}>
+      {state.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ReactSortable> */}
+      <div className="flex md:flex-row flex-col w-full h-full lg:px-[2%] ">
         <VideoPlayer currentVideo={currentlyActiveVideo} />
-        <div className="w-1/3 flex flex-col p-2 overflow-y-auto">
+        <div className="lg:w-1/2 md:w-3/5 xl:w-2/5 2xl:w-1/3 flex flex-col p-2 overflow-y-auto">
           <div className="w-full mb-4">
             <Filter />
           </div>
@@ -66,7 +73,7 @@ export default function Home() {
                   onClick={() =>
                     setCurrentlyActiveVideo(video)
                   }
-                  className="flex items-center cursor-pointer px-3 py-2 hover:bg-gray-900 hover:text-white duration-200 ease-in-out"
+                  className="flex items-center cursor-pointer py-2 hover:bg-gray-900 hover:text-white duration-200 ease-in-out"
                 >
                   <Card video={video} />
                 </div>

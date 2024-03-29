@@ -9,7 +9,7 @@ const Search = () => {
       type="text"
       placeholder="Search..."
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="bg-gray-700 text-white border border-gray-600 px-4 py-2 rounded-md focus:outline-none focus:border-gray-500"
+      className="bg-gray-700 text-white border border-gray-600 px-4 py-2 rounded-md focus:outline-none focus:border-gray-500 mr-[8.2%]"
     />
   );
 };
