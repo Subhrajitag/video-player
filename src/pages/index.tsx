@@ -43,21 +43,21 @@ export default function Home() {
   return (
     <main className={`w-full h-auto flex-col items-center  ${inter.className}`}>
       <Topbar />
-      <div className="flex md:flex-row flex-col w-full h-auto lg:px-[2%] lg:mt-[4%] mt-[15%] ">
+      <div className="flex md:flex-row flex-col w-full h-auto">
         <VideoPlayer currentVideo={currentlyActiveVideo} />
-        <div className="border lg:w-1/2 md:w-3/5 xl:w-2/5 2xl:w-1/3 flex flex-col p-2 overflow-y-auto">
+        <div className="lg:w-1/2 md:w-3/5 xl:w-2/5 2xl:w-1/3 flex flex-col p-2 overflow-y-auto">
           <div className="w-full mb-4">
             <Filter />
           </div>
           {videos?.length > 0 ? (
             <>
-              <h2 className="text-2xl font-semibold p-4 pt-0">Playlist</h2>
-              <div className="h-[740px] overflow-y-auto overscroll-y-contain rounded-md border">
-                {videos?.map((video: Video) => (
+              <h2 className="text-2xl font-semibold p-4">Playlist</h2>
+              <div className="h-[650px] overflow-y-auto overscroll-y-contain rounded-md border">
+                {videos.map((video: Video) => (
                   <div
-                    key={video?.title}
+                    key={video.title}
                     onClick={() => setCurrentlyActiveVideo(video)}
-                    className="mt-10 sm:mt-2 flex items-center cursor-pointer m-2 h-20 duration-200 ease-in-out rounded-lg hover:bg-neutral-100"
+                    className="mt-2 sm:mt-2 flex items-center cursor-pointer m-2 h-20 duration-200 ease-in-out rounded-lg hover:bg-neutral-100"
                   >
                     <Card video={video} />
                   </div>

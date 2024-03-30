@@ -35,7 +35,6 @@ const VideoPlayer = ({ currentVideo }: VideoPlayerProps) => {
       };
     }
     const interval = setInterval(() => {
-      console.log(currentVideo);
 
       if (videoRef.current) {
         const duration = videoRef.current?.duration;
@@ -73,25 +72,27 @@ const VideoPlayer = ({ currentVideo }: VideoPlayerProps) => {
   }, [currentVideo]);
 
   return (
-    <div className="lg:w-1/2 md:w-3/5 xl:w-3/5 2xl:w-2/3 h-full md:m-6 m-3 ">
-      <div className="video-container relative">
-        <video
-          ref={videoRef}
-          key={currentVideo.sources}
-          controls
-          width="100%"
-          className="rounded-md border"
-        >
-          <source src={currentVideo.sources} type="video/mp4" />
-        </video>
-      </div>
-      <div className="text-xl font-medium my-3">
-        {currentVideo.subtitle}
-      </div>
-      <div className="text-base">
-        {currentVideo.description}
+    <div className="lg:w-1/2 md:w-2/5 xl:w-3/5 2xl:w-2/3 h-full md:m-6 m-3 ">
+    <div className="video-container relative">
+      <video
+        ref={videoRef}
+        key={currentVideo.sources}
+        controls
+        width="100%"
+        className="rounded-md border"
+      >
+        <source src={currentVideo.sources} type="video/mp4" />
+      </video>
+      <div
+        className="absolute rounded-md top-0 left-0 z-10 w-full h-[60px] p-2 bg-gradient-to-b from-black to-transparent"
+        id="videoName"
+      >
+        <h2 className="text-white text-xl">{currentVideo.title}</h2>
       </div>
     </div>
+    <div className="text-xl font-medium my-3">{currentVideo.subtitle}</div>
+    <div className="text-base">{currentVideo.description}</div>
+  </div>
   );
 };
 
