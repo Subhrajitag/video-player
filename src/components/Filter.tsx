@@ -1,9 +1,10 @@
 import { VideoContextType, VideosContext } from "@/context/VideosContext";
-import { Video } from "@/types/VideoTypes";
 import React, { useContext } from "react";
 
 const Filter = () => {
-  const { setFilter, allVideosData } = useContext(VideosContext) as VideoContextType;
+  const { setFilter, allVideosData } = useContext(
+    VideosContext
+  ) as VideoContextType;
   const uniqueSubtitles = Array.from(
     new Set(
       Array.isArray(allVideosData)
@@ -13,17 +14,29 @@ const Filter = () => {
   );
 
   return (
-    <select
-      onChange={(e) => setFilter(e.target.value)}
-      className="bg-white border border-gray-300 px-4 py-2 rounded-md shadow-sm w-full appearance-none "
+    <div
+      className="p-4"
+      style={{ overflowX: "auto", whiteSpace: "nowrap" }}
     >
-      <option value="">All Subtitles</option>
-      {uniqueSubtitles && (uniqueSubtitles as string[]).map((subtitle: string) => (
-        <option key={subtitle} value={subtitle}>
-          {subtitle}
-        </option>
-      ))}
-    </select>
+      <button
+        className="bg-gray-200 text-black font-semibold border border-gray-300 text-[12px] px-4 py-2 rounded-full focus:outline-none hover:bg-gray-900 hover:text-white"
+        onClick={() => setFilter("")}
+      >
+        All Subtitles
+      </button>
+      {/* <div> */}
+      {uniqueSubtitles &&
+        (uniqueSubtitles as string[]).map((subtitle: string) => (
+          <button
+            key={subtitle}
+            className="bg-gray-200 font-semibold text-black border border-gray-300 text-[12px] px-4 py-2 rounded-full focus:outline-none hover:bg-gray-900 hover:text-white ml-4"
+            onClick={() => setFilter(subtitle)}
+          >
+            {subtitle}
+          </button>
+        ))}
+      {/* </div> */}
+    </div>
   );
 };
 

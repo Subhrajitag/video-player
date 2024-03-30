@@ -7,13 +7,15 @@ interface CardProps {
 }
 const Card = ({ video }: CardProps) => {
   return (
-    <div className="flex items-center cursor-pointer px-3 py-2 text-black  hover:text-white duration-200 ease-in-out">
-      {/* <Image
-        src={video.img}
+    <div className="flex items-start gap-x-3 cursor-pointer p-2 duration-200 ease-in-out">
+      <Image
+        src={`https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/${video.thumb}`}
         className=" sm:w-[60px] sm:h-[60px] lg:w-[140px] lg:h-[80px] rounded-lg object-cover "
+        width={140}
+        height={80}
      
-        alt={subtitle}
-      /> */}
+        alt={video.title}
+      />
 
       <h3 className=" lg:text-base sm:text-xs">
         {video.title}

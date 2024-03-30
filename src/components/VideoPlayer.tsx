@@ -1,37 +1,89 @@
 import { Video } from "@/types/VideoTypes";
-import React, { useState } from "react";
-
+import { getCookie, setCookie } from "cookies-next";
+import React, { useEffect, useRef, useState } from "react";
+import { FaCompass, FaExpand, FaPause, FaPlay, FaStop, FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
 interface VideoPlayerProps {
   currentVideo: Video;
 }
 const VideoPlayer = ({ currentVideo }: VideoPlayerProps) => {
-  const [isPlaying, SetPlaying] = useState(false);
-  // const tl = new TimelineLite({ delay: 0.3 });
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // useEffect(() => {
-  //   if (isPlaying) {
-  //     tl.fromTo("#videoName", { y: 0, opacity: 1 }, { y: -20, opacity: 0 });
-  //   } else {
-  //     tl.fromTo("#videoName", { y: -20, opacity: 0 }, { y: 0, opacity: 1 });
-  //   }
-  // }, [isPlaying, currentVideo]);
+  useEffect(() => {
+    if (currentVideo)
+      document.title = `${currentVideo.title} | Video Player`;
+
+    const videoDuration = getCookie('videoDuration');
+
+    const videoDurationArray = videoDuration ? JSON.parse(videoDuration) : [];
+    if (videoRef.current) {
+      videoRef.current.onloadedmetadata = () => {
+        const duration = videoRef.current?.duration;
+        const currentTimestamp = videoRef.current?.currentTime;
+        const video = {
+          title: currentVideo.title,
+          duration,
+          currentTimestamp,
+        };
+        const videoIndex = videoDurationArray.findIndex(
+          (video: { title: string }) => video.title === currentVideo.title
+        );
+        if (videoIndex === -1) {
+          videoDurationArray.push(video);
+        } else {
+          videoDurationArray[videoIndex] = video;
+        }
+      };
+    }
+    const interval = setInterval(() => {
+      console.log(currentVideo);
+
+      if (videoRef.current) {
+        const duration = videoRef.current?.duration;
+        const currentTimestamp = videoRef.current?.currentTime;
+        const video = {
+          title: currentVideo.title,
+          duration,
+          currentTimestamp,
+        };
+        const videoIndex = videoDurationArray.findIndex(
+          (video: { title: string }) => video.title === currentVideo.title
+        );
+        if (videoIndex === -1) {
+          videoDurationArray.push(video);
+        } else {
+          videoDurationArray[videoIndex] = video;
+        }
+        setCookie('videoDuration', videoDurationArray);
+      }
+    }, 5000);
+
+    if (videoDurationArray.length > 0) {
+      const videoIndex = videoDurationArray.findIndex(
+        (video: { title: string }) => video.title === currentVideo.title
+      );
+      if (videoIndex !== -1 && videoRef.current) {
+        videoRef.current.currentTime =
+          videoDurationArray[videoIndex].currentTimestamp;
+      }
+    }
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+    return () => clearInterval(interval);
+  }, [currentVideo]);
+
   return (
-    <div className="h-full md:m-6 m-3 ">
-      <div className="relative rounded-lg cursor-pointer" id="videoContainer">
+    <div className="lg:w-1/2 md:w-3/5 xl:w-3/5 2xl:w-2/3 h-full md:m-6 m-3 ">
+      <div className="video-container relative">
         <video
-          onPlay={() => SetPlaying(true)}
-          onPause={() => SetPlaying(false)}
-          className="min-w-full min-h-full w-auto h-auto bg-cover rounded-xl shadow"
+          ref={videoRef}
+          key={currentVideo.sources}
           controls
-          src={currentVideo.sources}
-          id="mainVideo"
-        ></video>
-        <div
-          className="absolute top-0 left-0 z-10 w-full h-[40px] p-2 bg-gradient-to-b from-black to-transparent"
-          id="videoName"
+          width="100%"
+          className="rounded-md border"
         >
-          <h2 className="text-white text-xl">{currentVideo.title}</h2>
-        </div>
+          <source src={currentVideo.sources} type="video/mp4" />
+        </video>
       </div>
       <div className="text-xl font-medium my-3">
         {currentVideo.subtitle}
