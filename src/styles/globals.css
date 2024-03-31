@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 3px; 
+  height: 5px; 
+  background-color: #e2e2e2; 
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999b9c; 
+  border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #bebfc2; 
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/public/fonts/Montserrat-Regular.woff2") format("truetype");
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .borderr {
+    border: 2px solid red;
+  }
+}
+.overscroll-y-contain::-webkit-scrollbar {
+  display: none;
+}
+.overscroll-y-contain {
+  overscroll-behavior-y: contain;
+}
+body {
+overflow: hidden;
+}
+
+/* For screen sizes below 1024px */
+@media screen and (max-width: 1023px) {
+  body {
+    overflow: auto;
+  }
+}
+
+.bg-blur {
+  background: transparent;
+  backdrop-filter: blur(30px);
+}
