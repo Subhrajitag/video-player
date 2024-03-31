@@ -7,7 +7,7 @@ To run this application locally, follow these steps:
 1.Clone the repository:
 git clone https://github.com/Subhrajitag/video-player.git
 
-N2.avigate to the project directory:
+2.Navigate to the project directory:
 cd nextjs-video-player
 
 3.Install dependencies:

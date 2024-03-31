@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const allVideosData = allVideos?.categories[0].videos.map(video => ({
     title: video.title,
     subtitle: video.subtitle,
-    sources: video.sources[0], // Extracting the first source as a single string
+    sources: video.sources[0],
     description: video.description,
     thumb: video.thumb
   }));
