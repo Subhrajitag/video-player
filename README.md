@@ -19,7 +19,7 @@ npm run dev
 5.Open your browser:
 Visit http://localhost:3000 to view the application.
 
-##Features
+## Features
 
 Play/Pause
 Volume Control
